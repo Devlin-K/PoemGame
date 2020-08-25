@@ -1,0 +1,24 @@
+.rock {
+    height: 400px;
+    background-image: url(../image/rock.jpg);
+    margin-top: 10px;
+    margin-right: auto;
+    background-size:100% 75%;
+    background-repeat: no-repeat;
+}
+.scissors {
+    height: 400px;
+    background-image: url(../image/scissors.jpeg);
+    margin-top: 10px;
+    margin-right: auto;
+    background-size:100% 75%;
+    background-repeat: no-repeat;
+}
+.palm {
+    height: 400px;
+    background-image: url(../image/palm.jpeg);
+    margin-top: 10px;
+    margin-right: auto;
+    background-size:100% 75%;
+    background-repeat: no-repeat;
+}

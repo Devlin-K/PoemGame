@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -26,19 +26,101 @@
             <div class="grid-demo grid-demo-bg1" >挑战者： vs 电脑： </div>
         </div>
         <div class="layui-col-xs12 layui-col-md4">
-            <div class="rock" id="rock">石头</div>
+            <button class="rock" id="rock" onclick="p(1);">石头</button>
         </div>
         <div class="layui-col-xs12 layui-col-md4">
-            <div class="scissors" id="scissors">剪刀</div>
+            <button class="scissors" id="scissors" onclick="p(2);">剪刀</button>
         </div>
         <div class="layui-col-xs12 layui-col-md4">
-            <div class="palm" id="palm">布</div>
+            <button class="palm" id="palm" onclick="p(3);">布</button>
+        </div>
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="computer" id="user">路人甲仔细考虑后选择出</div>
         </div>
         <div class="layui-col-xs12 layui-col-md12">
             <div class="computer" id="computer">电脑仔细考虑后选择出</div>
         </div>
+        <div class="layui-col-xs12 layui-col-md12">
+            <div class="computer" id="computerResult">电脑仔细考虑后选择出</div>
+        </div>
+        <div class="layui-col-xs12 layui-col-md4">
+            <button class="computer" id="again" onclick="agin()">再来一把</button>
+        </div>
     </div>
 </div>
 <script src="./layui/layui.js"></script>
+<script type="text/javascript">
+    var se = null, time = 20, you = 0, arr = new Array('石头', '抹布', '剪子');
+
+    function p(n) {
+        you = n;
+        document.getElementById('user').innerHTML = s(n);
+        document.getElementById('rock').disabled = true;
+        document.getElementById('palm').disabled = true;
+        document.getElementById('scissors').disabled = true;
+        document.getElementById('computerResult').innerHTML = '...';
+        se = setInterval('t()', 50);
+    }
+
+    function agin() {
+        document.getElementById('rock').disabled = false;
+        document.getElementById('palm').disabled = false;
+        document.getElementById('scissors').disabled = false;
+        document.getElementById('again').style.display = 'none';
+        document.getElementById('user').innerHTML = '';
+        document.getElementById('computer').innerHTML = '';
+        document.getElementById('computerResult').innerHTML = '';
+        document.getElementById('user').innerHTML = '请选择';
+    }
+
+    function bt() {
+        var pc = Math.floor(Math.random() * 3 + 1);
+        document.getElementById('computer').innerHTML = s(pc);
+        var str = '';
+        if (pc == you) {
+            str += '平局';
+        } else {
+            var b = pc - you;
+            if (b > 0) {
+                if (b == 1) {
+                    str += '电脑赢';
+                } else {
+                    str += '你赢啦';
+                }
+            } else {
+                b = b * -1;
+                if (b == 1) {
+                    str += '你赢啦';
+                } else {
+                    str += '电脑赢';
+                }
+            }
+        }
+        document.getElementById('again').style.display = 'block';
+        document.getElementById('computerResult').innerHTML = str;
+    }
+
+    function t() {
+        if (time > 0) {
+            document.getElementById('computer').innerHTML = arr[time % 3];
+            time--;
+        } else {
+            clearInterval(se);
+            se = null;
+            time = 20;
+            bt();
+        }
+    }
+
+    function s(n) {
+        if (n == 1) {
+            return '石头';
+        } else if (n == 2) {
+            return '剪子';
+        } else {
+            return '抹布';
+        }
+    }
+</script>
 </body>
 </html>
